@@ -1,16 +1,16 @@
 # Meeting 1 Agenda
 
 ## Introduction
-- name, year, major
-- skillset: cs/math/stats/ml/other
 
 ### Andy Wang
+andywang0321@gmail.com
 - Fourth year
 - Data Theory, minor Data science engineering
 - I come from the math/stats side of data science, though I am quite comfortable with ML programming
 - Languages: Python, SQL, R
 
 ### Tiffany Li
+kehan1230@gmail.com
 - Fourth year
 - Financial Actuarial Math major and data science engineering minor
 - My skills in programming are using Python to write the report by analyzing and visualizing.
@@ -24,21 +24,28 @@
 - AWS, S3, Spark, Redis
 
 ### Anvesha Dutta
-- Fourth yea
-- Data Theory, Data science engineering
+dutta.anvesha06@gmail.com
+- Fourth year
+- Data Theory, minor Data science engineering
 - Python, Streamlit, Tableau, scikitlearn, Tensorflow
 
 ### Sam Hopkins
+samthehopkin@gmail.com
 - Fourth year
 - CS Major
-- PyTorch
+- Python, ml packages like PyTorch, etc.
 
 ### Adithi Ramesh
- year CS major. I've taken most of the ML and Data Science electives offered so I have a basic understanding of the diff models and have worked with pandas, matplotlib, etc. I'm quite confident with python.
+adithi.ramesh02@gmail.com
+- Fourth year
+- CS major, taken most of the ML and Data Science electives offered
+- basic understanding of the diff models and have worked with
+- quite confident with python, pandas, matplotlib, etc.
 
 ## Project goal
 - get A on assignment?
- Preference
+
+    **General group preference**
 
 - get onto leaderboard?
 
@@ -66,10 +73,15 @@ Given the full texts of each paper, the goal is to automatically trace the most 
 - "inspiration" is very vague
 
 ## Dummy submission (19th of April)
-- to get access to LLM tokens
-- limited weekly submissions -- start early
-- Ask professor
-- Check TA discussion slide
+- All teams need to submit a dummy submission to the contest portal for their chosen task
+- Deadline: April 19, 11:59PM
+
+Steps:
+
+- Run the baseline code provided for your chosen task
+- Prepare the dummy submission file according to the specified format
+- Submit the dummy file to the contest portal
+- Verify that the submission was successful and meets the requirements
     
 ## GitHub / Google Drive setup
 - Matthew will create group shared repo
