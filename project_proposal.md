@@ -10,7 +10,13 @@ author:
 
 # Problem statement
 
+## Background
 
+The increasing number of online publications has made the name ambiguity problem more complex. Moreover, the inaccurate disambiguation results have led to invalid author rankings and award cheating. This competition hope participants develop a model to discover paper assignment errors for given authors.
+
+## Task
+
+Given each author’s profile, including author name and published papers, participants are asked to develop a model to detect incorrect paper assignments among all one’s papers. The paper attributes are provided, including title, abstract, authors, keywords, venue, and publication year.
 
 # Literature review
 
@@ -20,7 +26,13 @@ Zhang, F., Shi, S., Zhu, Y., Chen, B., Cen, Y., Yu, J., … & Tang, J. (2024). O
 
 # Tentative schedule
 
+## Timeline from KDD Cup website
 
+- March 20th, 2024: Start of KDD Cup 2024
+- May 31st, 2024: Team Merge Deadline
+- May 31st, 2024: Release test data. All participants have 7 days to submit their results.
+- June 7th, 2024: All tracks end.
+- June 14th, 2024: Announcement of the KDD Cup winner.
 
 # Tentative approach
 
@@ -28,7 +40,11 @@ Zhang, F., Shi, S., Zhu, Y., Chen, B., Cen, Y., Yu, J., … & Tang, J. (2024). O
 
 # Division of workload per member
 
-
+- Andy Wang
+- Matthew Liu
+- Tiffany Li
+- Adithi Ramesh
+- Anvesha Dutta
 
 # References
 
