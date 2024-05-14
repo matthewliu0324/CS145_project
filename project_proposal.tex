@@ -1,0 +1,321 @@
+\documentclass{article}
+
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2023
+
+
+% ready for submission
+\usepackage[final]{neurips_2023}
+
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+%     \usepackage[preprint]{neurips_2023}
+
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+%     \usepackage[final]{neurips_2023}
+
+
+% to avoid loading the natbib package, add option nonatbib:
+%    \usepackage[nonatbib]{neurips_2023}
+
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+
+\title{CS 145 Team 3 Project Proposal}
+
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+
+% \author[1]{Anvesha Dutta}
+% \author[2]{Sam Hopkins}
+% \author[3]{Kehan Li}
+% \author[4]{Matthew Liu}
+% \author[5]{Adithi Ramesh}
+% \author[6]{Andy Wang}
+
+\author{
+  Anvesha Dutta \\
+  B.S. Data Theory \\
+  \texttt{dutta.anvesha06@gmail.com}
+  \And
+  Sam Hopkins \\
+  B.S. Computer Science \\
+  \texttt{samthehopkin@gmail.com}
+  \And
+  Kehan Li \\
+  B.S. Financial Actuarial Mathematics \\
+  \texttt{kehan1230@gmail.com}
+  \And
+  Tsunming Liu \\
+  B.S. Mathematics of Computation \\
+  \texttt{tsunmingliu2024@gmail.com}
+  \And
+  Adithi Ramesh \\
+  B.S. Computer Science \\
+  \texttt{adithi.ramesh02@gmail.com}
+  \And
+  Andy Wang \\
+  B.S. Data Theory \\
+  \texttt{andywang0321@gmail.com}
+}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\begin{abstract}
+    In this proposal, we outline a plan to test the performance of different Open-Source Large Language Models on the Incorrect Name-Assignment Detection problem.
+\end{abstract}
+
+
+\section{Problem statement}
+
+Develop models to detect incorrect paper assignments given a dataset of author names and associated papers.
+
+\section{Literature review}
+
+In the ever-expanding academic landscape, accurate attribution of papers to authors is paramount, yet challenges persist due to errors in assignment. This review surveys the literature on detecting and addressing such errors.
+
+Early efforts relied on matching algorithms based on author names, keywords, and content, but faced limitations like name duplication and spelling disparities. Recent advancements in machine learning and natural language processing have led to more effective methods rooted in deep learning and text mining.
+
+Studies have explored techniques to enhance allocation systems and academic databases, introducing innovations such as author matching algorithms based on entity recognition and automatic paper assignment systems.
+
+The WhoIsWho project has notably introduced a large-scale academic name disambiguation benchmark and toolkit to address the challenge of ambiguous author names. They offer a comprehensive set of tasks and competitions to spur method development.
+
+The complexity of name disambiguation is attributed to non-uniform task designs and errors in noisy data. WhoIsWho's benchmarking process and toolkit aim to address these challenges, emphasizing a multimodal approach integrating semantic and relational features.
+
+Community-driven and open-source, WhoIsWho welcomes contributions to advance name disambiguation methods. Future research should focus on more accurate detection methods, analysis of error mechanisms, and optimization of academic databases and allocation systems.
+
+A proposed machine learning model aims to automate paper attribution by discerning relevant features from limited information such as abstracts, titles, publication dates, and journal names. This model holds potential for academic search engines, journals, publishers, research institutions, and libraries to enhance resource management and utilization.
+
+In summary, advancements in paper assignment error detection offer promising avenues for enhancing the efficiency and accuracy of academic research attribution and resource management.
+
+
+\section{Tentative schedule}
+
+\begin{itemize}
+    \item May 13th: Project proposal due
+    \item May 17th:  Individual Exploratory data analysis (everybody)
+    \item May 20th: Midterm Exam
+    \item May 21st: Brainstorm session (Requirement: everyone did enough EDA)
+    \item May 24th:  All LLMs will be finetuned for the first time by now
+    \item May 30th: The best LLM will be further finetuned by now
+    \item May 31st: Test data released, All participants have 7 days to submit results. We run the test set on our best model.
+    \item June 7th: KDD Competitions End + Final Report typed
+    \item June 10th: Final Presentation
+    \item June 14th: Winners announced
+\end{itemize}
+
+\section{Tentative approach}
+
+Out of the three baseline methods, we see that fine tuned ChatGLM has the best performance. Based on that observation, we think that LLMs could be a good approach to this problem. Using ChatGLM as a baseline, with that observed we will compare the performances of other popular Large Language Models. We will use Meta LLama3, Mistral AI Mistral, Google Gemma, and Apple OpenELM to solve the task, and see which one does the best.
+
+\section{Division of Workload per Member}
+
+\begin{itemize}
+    \item Andy Wang (OpenELM fine tuning https://huggingface.co/apple/OpenELM)
+    \item Tsun Ming Liu (LLama3 fine tuning https://huggingface.co/meta-llama/Meta-Llama-3-8B)
+    \item Kehan Li (Further data analysis and help out everyone else)
+    \item Adithi Ramesh (Mistral fine tuning)
+    \item Anvesha Dutta (Gemma fine tuning)
+    \item Sam Hopkins (Visualizations and help out everyone else)
+\end{itemize}
+
+\section*{References}
+
+{
+\small
+
+
+[1] Chen, B., Zhang, J., Zhang, F., Han, T., Cheng, Y., Li, X., … \& Tang, J. (2023, August). Web-scale academic name disambiguation: the WhoIsWho benchmark, leaderboard, and toolkit. In Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (pp. 3817-3828).
+
+[2] Zhang, F., Shi, S., Zhu, Y., Chen, B., Cen, Y., Yu, J., … \& Tang, J. (2024). OAG-Bench: A Human-Curated Benchmark for Academic Graph Mining. arXiv preprint arXiv:2402.15810.
+
+[3] https://arxiv.org/pdf/2402.15810 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}\documentclass{article}
+
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2023
+
+
+% ready for submission
+\usepackage[final]{neurips_2023}
+
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+%     \usepackage[preprint]{neurips_2023}
+
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+%     \usepackage[final]{neurips_2023}
+
+
+% to avoid loading the natbib package, add option nonatbib:
+%    \usepackage[nonatbib]{neurips_2023}
+
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+
+\title{CS 145 Team 3 Project Proposal}
+
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+
+% \author[1]{Anvesha Dutta}
+% \author[2]{Sam Hopkins}
+% \author[3]{Kehan Li}
+% \author[4]{Matthew Liu}
+% \author[5]{Adithi Ramesh}
+% \author[6]{Andy Wang}
+
+\author{
+  Anvesha Dutta \\
+  B.S. Data Theory \\
+  \texttt{dutta.anvesha06@gmail.com}
+  \And
+  Sam Hopkins \\
+  B.S. Computer Science \\
+  \texttt{samthehopkin@gmail.com}
+  \And
+  Kehan Li \\
+  B.S. Financial Actuarial Mathematics \\
+  \texttt{kehan1230@gmail.com}
+  \And
+  Tsunming Liu \\
+  B.S. Mathematics of Computation \\
+  \texttt{tsunmingliu2024@gmail.com}
+  \And
+  Adithi Ramesh \\
+  B.S. Computer Science \\
+  \texttt{adithi.ramesh02@gmail.com}
+  \And
+  Andy Wang \\
+  B.S. Data Theory \\
+  \texttt{andywang0321@gmail.com}
+}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\begin{abstract}
+    In this proposal, we outline a plan to test the performance of different Open-Source Large Language Models on the Incorrect Name-Assignment Detection problem.
+\end{abstract}
+
+
+\section{Problem statement}
+
+Develop models to detect incorrect paper assignments given a dataset of author names and associated papers.
+
+\section{Literature review}
+
+In the ever-expanding academic landscape, accurate attribution of papers to authors is paramount, yet challenges persist due to errors in assignment. This review surveys the literature on detecting and addressing such errors.
+
+Early efforts relied on matching algorithms based on author names, keywords, and content, but faced limitations like name duplication and spelling disparities. Recent advancements in machine learning and natural language processing have led to more effective methods rooted in deep learning and text mining.
+
+Studies have explored techniques to enhance allocation systems and academic databases, introducing innovations such as author matching algorithms based on entity recognition and automatic paper assignment systems.
+
+The WhoIsWho project has notably introduced a large-scale academic name disambiguation benchmark and toolkit to address the challenge of ambiguous author names. They offer a comprehensive set of tasks and competitions to spur method development.
+
+The complexity of name disambiguation is attributed to non-uniform task designs and errors in noisy data. WhoIsWho's benchmarking process and toolkit aim to address these challenges, emphasizing a multimodal approach integrating semantic and relational features.
+
+Community-driven and open-source, WhoIsWho welcomes contributions to advance name disambiguation methods. Future research should focus on more accurate detection methods, analysis of error mechanisms, and optimization of academic databases and allocation systems.
+
+A proposed machine learning model aims to automate paper attribution by discerning relevant features from limited information such as abstracts, titles, publication dates, and journal names. This model holds potential for academic search engines, journals, publishers, research institutions, and libraries to enhance resource management and utilization.
+
+In summary, advancements in paper assignment error detection offer promising avenues for enhancing the efficiency and accuracy of academic research attribution and resource management.
+
+
+\section{Tentative schedule}
+
+\begin{itemize}
+    \item May 13th: Project proposal due
+    \item May 17th:  Individual Exploratory data analysis (everybody)
+    \item May 20th: Midterm Exam
+    \item May 21st: Brainstorm session (Requirement: everyone did enough EDA)
+    \item May 24th:  All LLMs will be finetuned for the first time by now
+    \item May 30th: The best LLM will be further finetuned by now
+    \item May 31st: Test data released, All participants have 7 days to submit results. We run the test set on our best model.
+    \item June 7th: KDD Competitions End + Final Report typed
+    \item June 10th: Final Presentation
+    \item June 14th: Winners announced
+\end{itemize}
+
+\section{Tentative approach}
+
+Out of the three baseline methods, we see that fine tuned ChatGLM has the best performance. Based on that observation, we think that LLMs could be a good approach to this problem. Using ChatGLM as a baseline, with that observed we will compare the performances of other popular Large Language Models. We will use Meta LLama3, Mistral AI Mistral, Google Gemma, and Apple OpenELM to solve the task, and see which one does the best.
+
+\section{Division of Workload per Member}
+
+\begin{itemize}
+    \item Andy Wang (OpenELM fine tuning https://huggingface.co/apple/OpenELM)
+    \item Tsun Ming Liu (LLama3 fine tuning https://huggingface.co/meta-llama/Meta-Llama-3-8B)
+    \item Kehan Li (Further data analysis and help out everyone else)
+    \item Adithi Ramesh (Mistral fine tuning)
+    \item Anvesha Dutta (Gemma fine tuning)
+    \item Sam Hopkins (Visualizations and help out everyone else)
+\end{itemize}
+
+\section*{References}
+
+{
+\small
+
+
+[1] Chen, B., Zhang, J., Zhang, F., Han, T., Cheng, Y., Li, X., … \& Tang, J. (2023, August). Web-scale academic name disambiguation: the WhoIsWho benchmark, leaderboard, and toolkit. In Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (pp. 3817-3828).
+
+[2] Zhang, F., Shi, S., Zhu, Y., Chen, B., Cen, Y., Yu, J., … \& Tang, J. (2024). OAG-Bench: A Human-Curated Benchmark for Academic Graph Mining. arXiv preprint arXiv:2402.15810.
+
+[3] https://arxiv.org/pdf/2402.15810 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
