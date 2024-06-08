@@ -1,6 +1,5 @@
 from sklearn import metrics
 import numpy as np
-# from .utils import *
 
 def weighted_metric(pred_score:list , label: list) -> float:
     num_pred = [len(i) for i in pred_score]

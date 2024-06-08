@@ -12,7 +12,7 @@ from transformers import (
     DataCollatorForSeq2Seq,
 )
 from peft import get_peft_model, LoraConfig, TaskType
-
+from utils import INDDataSet
 from arguments import ModelArguments, DataTrainingArguments, GLMTrainingArguments
 
 logger = logging.getLogger(__name__)
@@ -63,13 +63,29 @@ def main():
         data_args.max_target_length,
     )
 
+    # peft_config = LoraConfig(
+    #     task_type=TaskType.CAUSAL_LM,
+    #     inference_mode=False,
+    #     r=model_args.lora_rank,
+    #     target_modules=['query_key_value'],
+    #     lora_alpha=model_args.lora_alpha,
+    #     lora_dropout=model_args.lora_dropout,
+    # )
+
     peft_config = LoraConfig(
-        task_type=TaskType.CAUSAL_LM,
-        inference_mode=False,
-        r=model_args.lora_rank,
-        target_modules=['query_key_value'],
-        lora_alpha=model_args.lora_alpha,
-        lora_dropout=model_args.lora_dropout,
+        r=16,  # dimension of the updated matrices
+        lora_alpha=64,  # parameter for scaling
+        target_modules=[
+          "q_proj",
+          "up_proj",
+          "o_proj",
+          "k_proj",
+          "down_proj",
+          "gate_proj",
+          "v_proj"],
+        lora_dropout=0.1,  # dropout probability for layers
+        bias="none",
+        task_type="CAUSAL_LM",
     )
     model = get_peft_model(model, peft_config).to("cuda")
 

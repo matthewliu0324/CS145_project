@@ -33,11 +33,12 @@ class LoRATrainer(Trainer):
         super().__init__(*args, **kwargs)
 
     def save_model(self, output_dir=None, _internal_call=False):
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         output_dir = output_dir if output_dir is not None else self.args.output_dir
         os.makedirs(output_dir, exist_ok=True)
         logger.info(f"Saving model checkpoint to {output_dir}")
         model_to_save = self.model
-        state_dict = {k: v.to("cuda:0") for k, v in model_to_save.named_parameters() if v.requires_grad}
+        state_dict = {k: v.to(device) for k, v in model_to_save.named_parameters() if v.requires_grad}
         # Using Hugging Face's save_pretrained instead of PyTorch's torch.save
         model_to_save.save_pretrained(output_dir, state_dict=state_dict, save_function=torch.save,safe_serialization=False)
         
