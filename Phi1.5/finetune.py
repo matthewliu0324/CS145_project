@@ -2,6 +2,7 @@ import logging
 import os
 import sys
 import json
+import torch
 from transformers import (
     AutoConfig,
     AutoModelForCausalLM,
@@ -14,6 +15,7 @@ from transformers import (
 from peft import get_peft_model, LoraConfig, TaskType
 from utils import INDDataSet
 from arguments import ModelArguments, DataTrainingArguments, GLMTrainingArguments
+from accelerate.utils import DistributedType
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +26,8 @@ def main():
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
+    training_args.distributed_state.distributed_type = DistributedType.DEEPSPEED
+        
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
         datefmt="%m/%d/%Y %H:%M:%S",
@@ -43,9 +47,9 @@ def main():
 
     config = AutoConfig.from_pretrained(model_args.model_name_or_path, trust_remote_code=True)
     config.use_cache = False
-
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     tokenizer = AutoTokenizer.from_pretrained(model_args.model_name_or_path, trust_remote_code=True)
-    model = AutoModelForCausalLM.from_pretrained(model_args.model_name_or_path, config=config, trust_remote_code=True).cuda()
+    model = AutoModelForCausalLM.from_pretrained(model_args.model_name_or_path, config=config, trust_remote_code=True).to(device)
 
     if model_args.quantization_bit is not None:
         model = model.quantize(model_args.quantization_bit)

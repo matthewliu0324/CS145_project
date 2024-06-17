@@ -14,9 +14,9 @@ from metric import compute_metric
 # Argument parser
 parser = argparse.ArgumentParser()
 parser.add_argument('--lora_path', help='The path to the LoRA file', default="saved_dir/checkpoint-100")
-parser.add_argument('--model_path', default='meta-llama/Meta-Llama-3-8B')
-parser.add_argument('--pub_path', help='The path to the pub file', default='test_pub.json')
-parser.add_argument('--eval_path', default='eval_data.json')
+parser.add_argument('--model_path', default='microsoft/phi-1_5')
+parser.add_argument('--pub_path', help='The path to the pub file', default='/content/drive/MyDrive/Ucla/LLama3/dataset/pid_to_info_all.json')
+parser.add_argument('--eval_path', default='/content/drive/MyDrive/Ucla/LLama3/dataset/ind_valid_author.json')
 parser.add_argument('--saved_dir', default='eval_result')
 args = parser.parse_args()
 
@@ -29,8 +29,11 @@ device = accelerator.device
 batch_size = 1
 
 # Load model and tokenizer
-model = AutoModelForCausalLM.from_pretrained(args.model_path, load_in_8bit=False, trust_remote_code=True).half().to(device)
+
 tokenizer = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained(args.model_path, load_in_8bit=False, trust_remote_code=True).half()
+if tokenizer.pad_token is None:
+    tokenizer.pad_token = tokenizer.eos_token
 lora_model = PeftModel.from_pretrained(model, args.lora_path).half().to(device)
 print('Done loading PEFT model')
 
