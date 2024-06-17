@@ -156,29 +156,29 @@ class IND4EVAL(Dataset):
         self.tokenizer = tokenizer
         self.max_source_length = max_source_length
         self.max_target_length = max_target_length
-        author_keys = self.author.keys()
+        author_keys = list(self.author.keys())
 
         self.val_set = []
-        if 'normal_data' in self.author[list(author_keys)[0]]:
+        if 'normal_data' in self.author[author_keys[0]]:
             for key in author_keys:   
                 for pub_key in self.author[key]['normal_data']:   
                     self.val_set.append({
-                        'pub':pub_key,
-                        'author':key,
-                        'label':1
+                        'pub': pub_key,
+                        'author': key,
+                        'label': 1
                     }) 
                 for pub_key in self.author[key]['outliers']:
                     self.val_set.append({
-                        'pub':pub_key,
-                        'author':key,
-                        'label':0
+                        'pub': pub_key,
+                        'author': key,
+                        'label': 0
                     }) 
-        elif 'papers' in self.author[list(author_keys)[0]]:
+        elif 'papers' in self.author[author_keys[0]]:
             for key in author_keys:   
                 for pub_key in self.author[key]['papers']:   
                     self.val_set.append({
-                        'pub':pub_key,
-                        'author':key,
+                        'pub': pub_key,
+                        'author': key,
                     }) 
         self.instruct = "Identify the abnormal text from the text collection according to the following rules:\n Here is a collection of paper titles: \n ### {} \n ### Does the paper title ### {} ### belong to the main part of these papers, give me an answer between 'yes' or 'no'."
 
@@ -187,31 +187,38 @@ class IND4EVAL(Dataset):
     
     def __getitem__(self, index):
         if "normal_data" in self.author[self.val_set[index]['author']]:
-            profile = self.author[self.val_set[index]['author']]['normal_data'] +self.author[self.val_set[index]['author']]['outliers']
+            profile = self.author[self.val_set[index]['author']]['normal_data'] + self.author[self.val_set[index]['author']]['outliers']
         elif "papers" in self.author[self.val_set[index]['author']]:
             profile = self.author[self.val_set[index]['author']]['papers']
         else:
-            raise("No profile found")
-        profile = [self.pub[p]['title'] for p in profile if p != self.val_set[index]['pub']] #delete disambiguate paper
+            raise ValueError("No profile found")
+
+        profile = [self.pub[p]['title'] for p in profile if p != self.val_set[index]['pub']]  # Delete disambiguate paper
         random.shuffle(profile)
 
-        tokenized_profile = [self.tokenizer.tokenize(i) for i in profile]
+        if self.tokenizer:
+            tokenized_profile = [self.tokenizer.tokenize(i) for i in profile]
+        else:
+            tokenized_profile = profile
+
         len_profile = [len(i) for i in tokenized_profile]
         sum_len = sum(len_profile)
-        if sum_len> self.max_source_length-500:
+
+        if sum_len > self.max_source_length - 500:
             total_len = 0
             p = 0   
-            while total_len < self.max_source_length-500 and p < sum_len:
+            while total_len < self.max_source_length - 500 and p < sum_len:
                 total_len += len_profile[p]
                 p += 1
             profile = profile[:p-1]
 
         profile_text = ' # '.join(profile)
         title = self.pub[self.val_set[index]['pub']]['title']
-        title = title if len(self.tokenizer.tokenize(title))<200 else ' '.join(title.split(' ')[:100]) 
-        context = self.instruct.format(profile_text,title)
+        title = title if self.tokenizer and len(self.tokenizer.tokenize(title)) < 200 else ' '.join(title.split(' ')[:100]) 
+        context = self.instruct.format(profile_text, title)
+
         return {
-            "input_ids":context,
-            "author":self.val_set[index]['author'],
-            "pub":self.val_set[index]['pub'],
+            "input_ids": context,  # Note: Assuming this should be text, not tensor
+            "author": self.val_set[index]['author'],
+            "pub": self.val_set[index]['pub'],
         }
